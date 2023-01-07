@@ -8,9 +8,9 @@ class pulseSettings():
     head_length = int(tail_length / 2)  # Number of leading pulses before message
     one_freq = 1000  # Freq for one
     zero_freq = 500  # Freq for two
-    drop_freq = zero_freq + ((one_freq - zero_freq) / 2)  # Freq for
-    head_freq = drop_freq  # Freq for head
-    tail_freq = drop_freq  # Freq for tail
+    r2z_freq = zero_freq + ((one_freq - zero_freq) / 2)  # Freq for
+    head_freq = r2z_freq  # Freq for head
+    tail_freq = r2z_freq  # Freq for tail
 
 
 def one():
@@ -22,18 +22,15 @@ def zero():
 
 
 def drop():
-    print("Drop")
-    sine(pulseSettings.drop_freq, pulseSettings.pluse_width)
+    sine(pulseSettings.r2z_freq, pulseSettings.pluse_width)
 
 
 def tail():
-    print("Tail")
     for i in range(0, pulseSettings.tail_length):
         sine(pulseSettings.tail_freq, pulseSettings.pluse_width)
 
 
 def head():
-    print("Head")
     for i in range(0, pulseSettings.head_length):
         sine(pulseSettings.head_freq, pulseSettings.pluse_width)
 
