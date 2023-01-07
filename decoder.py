@@ -60,6 +60,8 @@ def visualize(path: str):
     plt.plot(time, x)
     plt.show()
 
+    print(time)
+
 # you can also save
 # the plot using
 # plt.savefig('filename')
@@ -74,11 +76,11 @@ def extract(w, freqs):
 
 if __name__ == "__main__":
     # gets the command line Value
-    path = "/home/gabrieltower/PycharmProjects/AmMod/Monday at 22-31.wav"
+    path = "/Monday at 22-31.wav"
     visualize(path)
     audio_ar = audio_array(path)
     w = np.fft.fft(audio_ar)
     freqs = np.fft.fftfreq(len(w))
-    print(freqs)
+    #print(freqs)
     extract(w, freqs)
 
