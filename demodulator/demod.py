@@ -1,6 +1,12 @@
 import librosa
-from scipy.fft import fft
 import numpy as np
+
+
+filename = "/home/gabrieltower/Documents/GitHub/AmMod/modulator/path_of_file.wav"
+
+sr = librosa.get_samplerate(filename)
+
+stream = librosa.stream(filename, block_length=10, frame_length=10, hop_length=1024)
 
 
 def extract_peak_frequency(data, sampling_rate):
@@ -41,12 +47,6 @@ def binToText(bin):
     return output
 
 
-filename = "/home/gabrieltower/Documents/GitHub/AmMod/modulator/path_of_file.wav"
-
-sr = librosa.get_samplerate(filename)
-
-stream = librosa.stream(filename, block_length=10, frame_length=10, hop_length=1024)
-
 demodulated_text = ""
 
 for frame in stream:
@@ -61,4 +61,3 @@ for frame in stream:
         demodulated_text += ""
 
 
-print(binToText(space(decode(demodulated_text))))
