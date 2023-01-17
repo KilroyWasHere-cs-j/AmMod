@@ -4,7 +4,6 @@ from scipy.signal import butter, sosfilt, sosfreqz
 
 filename = "/home/gabetower/Git/AmMod/modulator/path_of_file.wav"
 
-bytes_decoded = 0
 lowpass = 500
 highpass = 1000
 order = 10
@@ -59,7 +58,6 @@ def binToText(bin):
     output = ""
     bytes = bin.split(' ')
     for b in bytes:
-        bi
         output += chr(int(b[:8], 2))
     return output
 
@@ -85,11 +83,7 @@ def main(path):
             demodulated_text += "_"
         else:
             demodulated_text += ""
-        try:
-            print(decodeToText(demodulated_text), end="\r")
-        except:
-            pass
-
+    print(decodeToText(demodulated_text))
 
 if __name__ == "__main__":
     main(filename)
