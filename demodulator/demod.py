@@ -45,8 +45,6 @@ def decode(bin):
             pass
     return decoded.replace('_', '')
 
-# Branching test
-
 #  Who knows how this works Python is shitty
 #  But it breaks the string up into blocks of 8
 def space(string):
