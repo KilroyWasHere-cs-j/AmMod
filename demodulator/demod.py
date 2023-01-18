@@ -37,6 +37,11 @@ def extract_peak_frequency(data, sampling_rate):
 
     return abs(peak_freq * sampling_rate)
 
+
+def list_To_String(list):
+    return "".join(list)
+
+
 def decode_To_Text(dt):
     dt = ["".join(g) for k, g in groupby(dt) if k != '_']  #
     dt = [x[0] for x in dt]
@@ -53,11 +58,8 @@ def space(string):
 
 #  Converts text into binary
 def binToText(bin):
-    output = ""
     bytes = bin.split(' ')
-    for b in bytes:
-        output += chr(int(b[:8], 2))
-    return output
+    return [chr(int(b[:8], 2)) for b in bytes]
 
 
 def main(path):
@@ -65,19 +67,12 @@ def main(path):
 
     stream = librosa.stream(filename, block_length=10, frame_length=10, hop_length=1024)
 
-    demodulated_text = ""
+    demodulated_text = str()
 
     for frame in stream:
         sig = butter_bandpass_filter(frame, lowpass, highpass, sr, order)
         peak_freq = int(extract_peak_frequency(sig, sr))
-        if peak_freq == 1000:
-            demodulated_text = "".join([demodulated_text, "1"])
-        elif peak_freq == 500:
-            demodulated_text = "".join([demodulated_text, "0"])
-        elif peak_freq == 750:
-            demodulated_text = "".join([demodulated_text, "_"])
-        else:
-            demodulated_text = "".join([demodulated_text, ""])
+        demodulated_text = "".join([demodulated_text, "1"]) if peak_freq == 1000 else "".join([demodulated_text, "0"]) if peak_freq == 500 else "".join([demodulated_text, "_"]) if peak_freq == 750 else "".join([demodulated_text, ""])
     print(decode_To_Text(demodulated_text))
     stop_time = time.perf_counter()
 
