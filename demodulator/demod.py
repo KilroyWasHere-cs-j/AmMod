@@ -1,6 +1,12 @@
 import librosa
 import numpy as np
 from scipy.signal import butter, sosfilt, sosfreqz
+import time
+import sys
+from itertools import groupby
+
+start_time = 0
+stop_time = 0
 
 filename = "/home/gabetower/Git/AmMod/modulator/path_of_file.wav"
 
@@ -31,19 +37,12 @@ def extract_peak_frequency(data, sampling_rate):
 
     return abs(peak_freq * sampling_rate)
 
+def decode_To_Text(dt):
+    dt = ["".join(g) for k, g in groupby(dt) if k != '_']  #
+    dt = [x[0] for x in dt]
+    dt = (''.join(dt))
+    return binToText(space(dt))
 
-#  As always clean this up this is a crime
-def decode(bin):
-    decoded = ""
-    lv = 3
-    pulse_count = 0
-    for i in bin:
-        if i != lv:
-            decoded += i
-            lv = i
-        else:
-            pass
-    return decoded.replace('_', '')
 
 #  Who knows how this works Python is shitty
 #  But it breaks the string up into blocks of 8
@@ -60,9 +59,6 @@ def binToText(bin):
         output += chr(int(b[:8], 2))
     return output
 
-def decodeToText(bin):
-    return binToText(space(decode(bin)))
-
 
 def main(path):
     sr = librosa.get_samplerate(filename)
@@ -75,14 +71,18 @@ def main(path):
         sig = butter_bandpass_filter(frame, lowpass, highpass, sr, order)
         peak_freq = int(extract_peak_frequency(sig, sr))
         if peak_freq == 1000:
-            demodulated_text += "1"
+            demodulated_text = "".join([demodulated_text, "1"])
         elif peak_freq == 500:
-            demodulated_text += "0"
+            demodulated_text = "".join([demodulated_text, "0"])
         elif peak_freq == 750:
-            demodulated_text += "_"
+            demodulated_text = "".join([demodulated_text, "_"])
         else:
-            demodulated_text += ""
-    print(decodeToText(demodulated_text))
+            demodulated_text = "".join([demodulated_text, ""])
+    print(decode_To_Text(demodulated_text))
+    stop_time = time.perf_counter()
+
+    print((stop_time - start_time))
 
 if __name__ == "__main__":
+    start_time = time.perf_counter()
     main(filename)
