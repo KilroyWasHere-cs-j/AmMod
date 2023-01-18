@@ -46,7 +46,7 @@ def decode_To_Text(dt):
     dt = ["".join(g) for k, g in groupby(dt) if k != '_']  #
     dt = [x[0] for x in dt]
     dt = (''.join(dt))
-    return binToText(space(dt))
+    return list_To_String(binToText(space(dt)))
 
 
 #  Who knows how this works Python is shitty
