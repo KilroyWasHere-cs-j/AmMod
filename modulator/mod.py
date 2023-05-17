@@ -21,7 +21,7 @@ def convert_to_bin(command):
 
 
 def get_encoding_duration(bin):
-    return (len(bin) * 0.5) * 2
+    return len(bin) * 2
 
 
 def record(seconds):

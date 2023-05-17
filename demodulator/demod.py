@@ -32,6 +32,7 @@ def extract_peak_frequency(data, sampling_rate):
     return abs(peak_freq * sampling_rate)
 
 
+
 #  As always clean this up this is a crime
 def decode(bin):
     decoded = ""
