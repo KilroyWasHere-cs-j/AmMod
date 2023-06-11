@@ -3,7 +3,7 @@ from pysine import sine
 
 # Because python is too much of a beta bitch to have structs
 class pulseSettings():
-    pluse_width = 0.5  # Length of pulse
+    pluse_width = 0.2  # Length of pulse
     tail_length = 6  # Number of trailing pulses after message
     head_length = int(tail_length / 2)  # Number of leading pulses before message
     one_freq = 1000  # Freq for one

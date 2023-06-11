@@ -2,7 +2,7 @@ import librosa
 import numpy as np
 from scipy.signal import butter, sosfilt, sosfreqz
 
-filename = "/home/gabetower/Git/AmMod/modulator/path_of_file.wav"
+filename = "/home/gabrielt/Git/AmMod/modulator/path_of_file.wav"
 
 lowpass = 500
 highpass = 1000
@@ -67,6 +67,7 @@ def decodeToText(bin):
 
 
 def main(path):
+    print("Pulling from: ", filename)
     sr = librosa.get_samplerate(filename)
 
     stream = librosa.stream(filename, block_length=10, frame_length=10, hop_length=1024)

@@ -2,6 +2,7 @@ import generator as gen
 import pyaudio
 import wave
 import _thread
+import time
 
 
 # Record in chunks of 1024 samples
@@ -21,7 +22,7 @@ def convert_to_bin(command):
 
 
 def get_encoding_duration(bin):
-    return len(bin) * 2
+    return len(bin)
 
 
 def record(seconds):
@@ -59,7 +60,7 @@ def encode(bin):
     encode_duration = get_encoding_duration(bin)
     seconds_elapsed = 0
     print('Encoding will take {0}'.format(encode_duration))
-    _thread.start_new_thread(record, ((encode_duration + gen.get_tail_length() - 2), ))
+    _thread.start_new_thread(record, ((encode_duration + gen.get_tail_length()), ))
     gen.head()
     for char in bin:
         seconds_elapsed = seconds_elapsed + 1
@@ -76,6 +77,7 @@ def encode(bin):
 
 def main():
     encode(convert_to_bin(input("Input ")))
+    time.sleep(5)
 
 
 if __name__ == "__main__":
