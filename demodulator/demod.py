@@ -47,8 +47,6 @@ def decode(bin):
     return decoded.replace('_', '')
 
 
-#  Who knows how this works Python is shitty
-#  But it breaks the string up into blocks of 8
 def space(string):
     chunk = 8
     return str(' '.join([string[i:i + chunk] for i in range(0, len(string), chunk)]))
