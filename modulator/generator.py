@@ -1,7 +1,5 @@
 from pysine import sine
 
-
-# Because python is too much of a beta bitch to have structs
 class pulseSettings():
     pluse_width = 0.2  # Length of pulse
     tail_length = 6  # Number of trailing pulses after message
